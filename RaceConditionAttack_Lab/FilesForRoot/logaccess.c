@@ -13,7 +13,7 @@ int main(int argc, char* argv[]){
     char * message = argv[1];
     FILE * fileHandler;
 
-    char * fileName = "./rootlogfile.txt";
+    char * fileName = "../Root/rootlogfile.txt";
 
     fileHandler = fopen(fileName, "a+");
     if (fileHandler == NULL){

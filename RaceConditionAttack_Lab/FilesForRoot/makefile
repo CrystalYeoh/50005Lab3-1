@@ -13,37 +13,40 @@ CC = gcc
 all: rootprogram rootdoprogram logaccessprogram rootprogram_nosuid setup 
 
 rootprogram: rootprog.c
-	$(CC) rootprog.c -o rootprog
+	rm -rf ../Root/
+	mkdir ../Root/
+	$(CC) rootprog.c -o ../Root/rootprog
 
 rootdoprogram: rootdo.c
-	$(CC) rootdo.c -o rootdo 
+	$(CC) rootdo.c -o ../Root/rootdo 
 
 logaccessprogram: logaccess.c 
-	$(CC) logaccess.c -o logaccess 
+	$(CC) logaccess.c -o ../Root/logaccess 
 
 rootprogram_nosuid: rootprog.c 
-	$(CC) rootprog.c -o rootprog_nosuid
+	$(CC) rootprog.c -o ../Root/rootprog_nosuid
 
 # refresh the root files and root log file
 # Set UID for rootprog and rootdo
 # Set logaccess to be executable only by ROOT
 setup: 
-	chmod 744 logaccess 
-	chmod u+s rootprog 
-	chmod u+s rootdo
-	echo THIS IS ROOT FILE > rootfile.txt
-	echo THIS IS ROOT FILE > rootlogfile.txt
+	chmod 744 ../Root/logaccess 
+	chmod u+s ../Root/rootprog 
+	chmod u+s ../Root/rootdo
+	echo THIS IS ROOT FILE > ../Root/rootfile.txt
+	echo THIS IS ROOT FILE > ../Root/rootlogfile.txt
 
 test:
-	ls -la
-	./rootdo ./logaccess testlogFile
-	cat rootlogfile.txt
+	ls -la ../Root
+	../Root/rootdo ../Root/logaccess testlogFile
+	cat ../Root/rootlogfile.txt
 
 clean:
-	$(REMOVE) rootprog
-	$(REMOVE) rootdo 
-	$(REMOVE) logaccess 
-	$(REMOVE) rootprog_nosuid
-	$(REMOVE) rootfile.txt
-	$(REMOVE) rootlogfile.txt
+	$(REMOVE) ../Root/rootprog
+	$(REMOVE) ../Root/rootdo 
+	$(REMOVE) ../Root/logaccess 
+	$(REMOVE) ../Root/rootprog_nosuid
+	$(REMOVE) ../Root/rootfile.txt
+	$(REMOVE) ../Root/rootlogfile.txt
+	rm -rf ../Root/
 

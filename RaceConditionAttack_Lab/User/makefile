@@ -20,4 +20,4 @@ execute:
 
 clean:
 	$(REMOVE) symlink
-	$(REMOVE) fakeroot_file.txt
+	$(REMOVE) ../userfile.txt
